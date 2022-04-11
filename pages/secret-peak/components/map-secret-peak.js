@@ -31,7 +31,7 @@ export default class MapSecretPeak extends React.Component{
 
         return (
             <div className="container">
-                <div style={{position: "absolute"}}>
+                <div style={{position: "relative"}}>
                     <Image  alt={'secret peak map'} src={secretPeak}/>
                     {listBosses}
                 </div>
