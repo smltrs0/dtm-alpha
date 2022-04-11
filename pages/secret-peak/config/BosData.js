@@ -3,10 +3,11 @@ const timeGoldBosses = 3600;
 const ColorRandom =()=> '#'+Math.floor(Math.random()*16777215).toString(16);
 export const BosstData = [
     {
-        name: "Boos 1",
+        name: "Boss 1",
         time : 22,
         sound : "Boss 1 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss1",
         position : {
             top: "70px",
             left: "664px",
@@ -15,10 +16,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 2",
+        name: "Boss 2",
         time : timeGreenBosses,
         sound : "Boss 2 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss2",
         position: {
             top: "141px",
             left: "451px",
@@ -27,10 +29,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 3",
+        name: "Boss 3",
         time : timeGreenBosses,
         sound : "Boss 3 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss3",
         position: {
             top: "187px",
             left: "296px",
@@ -39,10 +42,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 4",
+        name: "Boss 4",
         time : 9,
         sound : "Boss 4 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss4",
         position: {
             top: "174px",
             left: "674px",
@@ -51,10 +55,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 5",
+        name: "Boss 5",
         time : timeGoldBosses,
         sound : "Boss 5 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss5",
         position: {
             top: "321px",
             left: "288px",
@@ -63,10 +68,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 6",
+        name: "Boss 6",
         time : timeGreenBosses,
         sound : "Boss 6 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss6",
         position: {
             top: "389px",
             left: "655px",
@@ -75,10 +81,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 7",
+        name: "Boss 7",
         time : timeGreenBosses,
         sound : "Boss 7 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss7",
         position: {
             top: "305px",
             left: "350px",
@@ -87,10 +94,11 @@ export const BosstData = [
         }
     },
     {
-        name: "Boos 8",
+        name: "Boss 8",
         time : 75,
         sound : "Boss 8 is about to spawn.mp3",
         color: ColorRandom(),
+        class: "boss8",
         position: {
             top: "413px",
             left: "306px",

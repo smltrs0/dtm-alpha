@@ -3,12 +3,13 @@ import Image from "next/image";
 import secretPeak from './../../../public/secret-peak.png';
 import BoosTimer from "@/components/boosTimer";
 import {BosstData} from "@/pages/secret-peak/config/BosData";
-import HourDiff from "@/utils/Times/HoursDiff";
-import moment from "moment";
+import {useDispatch, useSelector} from "react-redux";
 
 export default class MapSecretPeak extends React.Component{
     render() {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
 
+        // dummy component
         let listBosses = BosstData.map((boss, index)=>{
             return <div style={boss.position} key={index}>
                 {!['Boos 1', 'Boos 8'].includes(boss.name) &&

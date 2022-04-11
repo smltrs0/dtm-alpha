@@ -4,12 +4,11 @@ import PlayAlertSound from "@/pages/secret-peak/components/Sound";
 
 export default function BoosTimer({time, bossNumber, bossColor}) {
 
-    let isPlaying = useState(false);
-    let [stateCounter, changeStateConunter] = [...isPlaying];
-    let toggleStateCounter = ()=>{ changeStateConunter(!stateCounter) }
+    let [stateCounter, setStateCounter] = useState(false);
+    let [alertSoundState, changeAlertSoundPlaying] = useState(false);
+    let [completeChronometer, changeCompleteChronometer] = useState(false);
 
-    let alertSoundIsPlaying = useState(false);
-    let [alertSoundState, changeAlertSoundPlaying] = [...alertSoundIsPlaying];
+    let toggleStateCounter = ()=>{ setStateCounter(!stateCounter) }
 
     const setStateSound = (remainingTime)=>{
         if (remainingTime === 15 && alertSoundState === false) {
@@ -18,9 +17,12 @@ export default function BoosTimer({time, bossNumber, bossColor}) {
         }else if(remainingTime !== 15){
             changeAlertSoundPlaying(false);
         }
+        if(completeChronometer && remainingTime === (time-1)){
+            setStateCounter(false);
+        }
     }
 
-    const seconsToTime = (seconds)=>{
+    const secondsToTime = (seconds)=>{
         let minutes = Math.floor(seconds / 60);
         let seconds2 = seconds - minutes * 60;
         return `${minutes}:${seconds2}`;
@@ -34,17 +36,21 @@ export default function BoosTimer({time, bossNumber, bossColor}) {
                     trailColor={'gray'}
                     isPlaying = {stateCounter}
                     size = {56}
+                    initialRemainingTime={time}
                     duration={time}
                     colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                     colorsTime={[(time), 5, 2, 0]}
                     onComplete={()=>{
                         PlayAlertSound(bossNumber);
+                        changeCompleteChronometer(true);
                         return { shouldRepeat: true}
+                    }}
+                    onUpdate={(remainingTime)=>{
+                        setStateSound(remainingTime);
                     }}
                 >
                     {({remainingTime}) => {
-                        setStateSound(remainingTime);
-                        return <div className="text-danger">{seconsToTime(remainingTime)}</div>;
+                        return <div className="text-danger">{secondsToTime(remainingTime)}</div>;
                     }}
                 </CountdownCircleTimer>
             </div>
