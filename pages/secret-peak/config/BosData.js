@@ -9,10 +9,10 @@ export const BosstData = [
         color: ColorRandom(),
         class: "boss1",
         position : {
-            top: "70px",
-            left: "664px",
+            top: "-592px",
+            left: "840px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -25,7 +25,7 @@ export const BosstData = [
             top: "141px",
             left: "451px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -38,7 +38,7 @@ export const BosstData = [
             top: "187px",
             left: "296px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -51,7 +51,7 @@ export const BosstData = [
             top: "174px",
             left: "674px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -64,7 +64,7 @@ export const BosstData = [
             top: "321px",
             left: "288px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -77,7 +77,7 @@ export const BosstData = [
             top: "389px",
             left: "655px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -90,7 +90,7 @@ export const BosstData = [
             top: "305px",
             left: "350px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     },
     {
@@ -103,6 +103,6 @@ export const BosstData = [
             top: "413px",
             left: "306px",
             zIndex: "1",
-            position: "absolute"
+            position: "relative"
         }
     }]
