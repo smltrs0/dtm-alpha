@@ -9,8 +9,8 @@ export const BosstData = [
         color: ColorRandom(),
         class: "boss1",
         position : {
-            top: "70px",
-            left: "664px",
+            top: "4em",
+            left: "41em",
             zIndex: "1",
             position: "absolute"
         }
