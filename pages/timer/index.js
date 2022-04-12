@@ -1,9 +1,9 @@
 import {Header, Layout} from "@/components";
-import getTimeRemening from "@/services/time/getTimeRemening";
+import getTimeRemaining from "@/services/time/getTimeRemaining";
 import moment from "moment";
 import CountDownTimer from "@/components/CountDownTimer";
 import getTimeZone from "@/pages/timer/components/getTimeZone";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 const dateTomeNow = new moment();
 const is_night = dateTomeNow.hour() > 12 ;
 
@@ -11,22 +11,26 @@ const is_night = dateTomeNow.hour() > 12 ;
 const hoursMinSecs = {hours:1, minutes: 20, seconds: 40}
 
 var date = String(dateTomeNow.format('YYYY-MM-DD'));
-var respawnLaberintMorning = "18:00";
+var veinte_de_la_noche = "20:00";
 
-var jefeLaberintoTemprano = moment(date).startOf(respawnLaberintMorning);
+var jefeLaberintoTemprano = moment(date).startOf(veinte_de_la_noche);
 
 
 export default function Timer(){
     const [date_time, setDate_time] = useState({});
-    // getTimeZone().then(data => {
-    //     setDate_time(data);
-    // });
+    const [DateTimeJustNow, setDateTimeJustNow] = useState(dateTomeNow);
+
+    useEffect(() => {
+        getTimeZone().then(data => {
+            setDate_time(data);
+            setDateTimeJustNow(moment(date.date_time))
+        });
+    }, []);
     return <>
         <Layout>
             <Header/>
             <div>
                 <h1>Timer</h1>
-                    <CountDownTimer hoursMinSecs={hoursMinSecs}/>
                 <table className="text-center table">
                     <thead>
                         <tr>
@@ -42,16 +46,16 @@ export default function Timer(){
                     <tbody>
                         <tr>
                             <td>
-                                <CountDownTimer hoursMinSecs={{hours:10, minutes: 0, seconds: 0}}/>
+                                <CountDownTimer hoursMinSecs={getTimeRemaining(dateTomeNow.format('YYYY-MM-DD')+' 10:00:00', DateTimeJustNow)}/>
                             </td>
                             <td>
-                                <CountDownTimer hoursMinSecs={{hours:12, minutes: 0, seconds: 0}}/>
+                                <CountDownTimer hoursMinSecs={getTimeRemaining(dateTomeNow.format('YYYY-MM-DD')+' 12:00:00', DateTimeJustNow)}/>
                             </td>
                             <td>
-                                <CountDownTimer hoursMinSecs={getTimeRemening(jefeLaberintoTemprano, dateTomeNow)}/>
+                                <CountDownTimer hoursMinSecs={getTimeRemaining(dateTomeNow.format('YYYY-MM-DD')+' 20:00:00', DateTimeJustNow)}/>
                             </td>
                             <td>
-                                <CountDownTimer hoursMinSecs={{hours:36, minutes: 0, seconds: 0}}/>
+                                <CountDownTimer hoursMinSecs={getTimeRemaining(dateTomeNow.format('YYYY-MM-DD')+' 22:00:00', DateTimeJustNow)}/>
                             </td>
                         </tr>
                     </tbody>
@@ -59,7 +63,7 @@ export default function Timer(){
             </div>
             <div>
                 <p>Time Zone : {date_time.timezone}</p>
-                <p>Time Zone Offset : {date_time.time_24}</p>
+                <p>Date, time, hours synchronized with the server : {date_time.time_24}</p>
             </div>
         </Layout>
     </>

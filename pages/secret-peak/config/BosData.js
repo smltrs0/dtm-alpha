@@ -10,7 +10,7 @@ export const BosstData = [
         class: "boss1",
         position : {
             top: "4em",
-            left: "41em",
+            left: "41.3em",
             zIndex: "1",
             position: "absolute"
         }
