@@ -6,7 +6,7 @@ export default function magicSquare(){
             <div>
                 <h1>Magic square</h1>
                 <p>
-                    This is the Magic square page.
+                    Coming soon
                 </p>
             </div>
         </Layout>

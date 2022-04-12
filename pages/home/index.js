@@ -1,11 +1,11 @@
 import { Header, Layout} from "@/components";
-import Wellcome from "@/components/wellcome";
+import Welcome from "@/components/welcome";
 
 function homePage() {
     return (
         <Layout>
             <Header />
-            <Wellcome />
+            <Welcome />
         </Layout>
     );
 }

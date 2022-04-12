@@ -1,62 +1,120 @@
-import React from 'react';
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-} from 'chart.js';
-import {Line} from 'react-chartjs-2';
+import React, {Component} from 'react';
+import Chart from 'chart.js/auto';
+import {getPrice} from "@/services/finance/WemixValues";
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
+export default class LineChart extends Component {
+    constructor() {
+        super(undefined);
+          setInterval(async () => {
+              let result = await getPrice();
+              this.actualizarDatos({ data: result.Data})
+          }, 4000);
+  }
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
-    },
-  },
-};
+    chartRef = React.createRef();
+    addData(chart, label, data) {
+        const [Draco, Klay, Wemix] = chart.data.datasets
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+            if (chart.data?.labels.length >= 600) {
+                chart.data.labels.shift();
+                Draco.data.shift();
+                Klay.data.shift();
+                Wemix.data.shift();
+            }
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [10, 20, 30, 40, 50, 60, 70],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [20, 30, 40, 50, 60, 70, 80],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+            chart.data.labels.push(label);
+            Draco.data.push(data.USDDracoRate);
+            Klay.data.push(data.USDKLAYRate);
+            Wemix.data.push(data.USDWemixRate);
+            chart.update();
 
-export default function DataChart() {
-  return <div>
-    <h2>You can even make crazy graphs like this!</h2>
-    <Line options={options} data={data}/>;
-  </div>
-};
+    }
+
+    actualizarDatos({ label = '', data }) {
+
+        const currentDate = new Date();
+        const datetime =  `${currentDate.getHours()} : ${currentDate.getMinutes()}: ${currentDate.getSeconds()}`;
+        this.addData(this.chart, datetime, data)
+    }
+
+
+
+
+    componentDidMount() {
+        const ctx = this.chartRef.current.getContext("2d");
+
+        this.chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [],
+                    label: "Draco",
+                    borderColor: "#3e95cd",
+                    backgroundColor: "#7bb6dd",
+                    fill: false,
+                },{
+                    data: [],
+                    label: "Klay",
+                    borderColor: "#3cba9f",
+                    backgroundColor: "#71d1bd",
+                    fill: false,
+                },{
+                    data: [],
+                    label: "Wemix",
+                    borderColor: "#ffa500",
+                    backgroundColor:"#ffc04d",
+                    fill: false,
+                }]
+            }
+        });
+    }
+
+    render() {
+        return (
+            <>
+                <div className="card">
+                    <div className="card-body">
+                        <div className="row mb-3">
+                            <div className="col-md-4">
+                                <div className="form-group">
+                                    <input type="text" className="form-control" placeholder="Price to trigger alert" />
+                                </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="form-group">
+                                    <select className="form-control">
+                                        <option>Draco</option>
+                                        <option>KLAY</option>
+                                        <option>Wemix</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas
+                            id="myChart"
+                            ref={this.chartRef}
+                        />
+                    </div>
+                </div>
+                <div className="card mt-2 mb-5">
+                    <div className="card-header">
+                        Config <i>eye-icon</i>
+                    </div>
+                    <div className="card-body">
+                        <div className="form-group">
+                            <label>Rate time update</label>
+                            <input type="number" step={1}  className="form-control" placeholder="Rate time update" />
+                        </div>
+                        <div className="form-group">
+                            <label>
+                                <input type="checkbox" />
+                                <span className="ml-2">Play sound</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    }
+}
