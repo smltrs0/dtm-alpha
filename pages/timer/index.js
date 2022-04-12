@@ -2,7 +2,8 @@ import {Header, Layout} from "@/components";
 import getTimeRemening from "@/services/time/getTimeRemening";
 import moment from "moment";
 import CountDownTimer from "@/components/CountDownTimer";
-
+import getTimeZone from "@/pages/timer/components/getTimeZone";
+import {useState} from "react";
 const dateTomeNow = new moment();
 const is_night = dateTomeNow.hour() > 12 ;
 
@@ -16,6 +17,10 @@ var jefeLaberintoTemprano = moment(date).startOf(respawnLaberintMorning);
 
 
 export default function Timer(){
+    const [date_time, setDate_time] = useState({});
+    // getTimeZone().then(data => {
+    //     setDate_time(data);
+    // });
     return <>
         <Layout>
             <Header/>
@@ -51,6 +56,10 @@ export default function Timer(){
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <p>Time Zone : {date_time.timezone}</p>
+                <p>Time Zone Offset : {date_time.time_24}</p>
             </div>
         </Layout>
     </>
