@@ -1,69 +1,62 @@
 import React from 'react';
-import {Bar} from 'react-chartjs-2';
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from 'chart.js';
+import {Line} from 'react-chartjs-2';
 
-const initialState = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
-  ]
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Chart.js Line Chart',
+    },
+  },
 };
 
-class Graph extends React.Component{
-  componentWillMount(){
-    this.setState(initialState);
-  }
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-  componentDidMount(){
-    var _this = this;
+export const data = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [10, 20, 30, 40, 50, 60, 70],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+    {
+      label: 'Dataset 2',
+      data: [20, 30, 40, 50, 60, 70, 80],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
 
-    setInterval(function(){
-      var oldDataSet = _this.state.datasets[0];
-      var newData = [];
-
-      for(var x=0; x< _this.state.labels.length; x++){
-        newData.push(Math.floor(Math.random() * 100));
-      }
-
-      var newDataSet = {
-        ...oldDataSet
-      };
-
-      newDataSet.data = newData;
-      newDataSet.backgroundColor = 'red';
-      newDataSet.borderColor = 'blue';
-      newDataSet.hoverBackgroundColor = 'green';
-      newDataSet.hoverBorderColor = 'yellow';
-
-      var newState = {
-        ...initialState,
-        datasets: [newDataSet]
-      };
-
-      _this.setState(newState);
-    }, 5000);
-  }
-
-  render() {
-    return (
-        <>
-          <Bar data={this.state} />
-          <p>CHART MOUNTED</p>
-        </>
-    );
-  }
-}
-
-export  default function dataChart () {
+export default function DataChart() {
   return <div>
     <h2>You can even make crazy graphs like this!</h2>
-    <Graph />
+    <Line options={options} data={data}/>;
   </div>
 };
