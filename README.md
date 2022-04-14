@@ -16,7 +16,7 @@
 +---models
 +---pages
 |   \---api
-|       \---employees
+|       \---coming-soon
 +---store
 |   +---actions
 |   +---reducers
@@ -67,7 +67,3 @@
 ```bash
   yarn start or npm start
 ```
-
-## 4. License
-
-MIT © [Roldan Montilla Jr](https://github.com/roldanjr)
