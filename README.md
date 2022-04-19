@@ -1,5 +1,3 @@
-![Project Preview](preview.PNG)
-
 # Table of Content
 
 - [Table of Content](#table-of-content)

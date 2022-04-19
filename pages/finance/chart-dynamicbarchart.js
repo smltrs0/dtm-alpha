@@ -8,7 +8,7 @@ export default class LineChart extends Component {
           setInterval(async () => {
               let result = await getPrice();
               this.actualizarDatos({ data: result.Data})
-          }, 4000);
+          }, 60000);
   }
 
     chartRef = React.createRef();
@@ -73,7 +73,8 @@ export default class LineChart extends Component {
     render() {
         return (
             <>
-                <div className="card">
+                <div className="card" style={{ backgroundColor: '#252836', borderRadius: '0.5em' }}>
+                    <div className="alert alert-warning text-center" style={{borderRadius: '0.5em'}}>Server update time default value is 1 minute due to wemade service restrictions</div>
                     <div className="card-body">
                         <div className="row mb-3">
                             <div className="col-md-4">
@@ -97,7 +98,7 @@ export default class LineChart extends Component {
                         />
                     </div>
                 </div>
-                <div className="card mt-2 mb-5">
+                <div className="card mt-2 mb-5" style={{ backgroundColor: '#252836', borderRadius: '0.5em' }}>
                     <div className="card-header">
                         Config <i>eye-icon</i>
                     </div>

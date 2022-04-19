@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export function Layout({ children }) {
 	return (
-		<main className="container">
+		<main>
 			<Head>
 				<title>Voodoo team</title>
 			</Head>

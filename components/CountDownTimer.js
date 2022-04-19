@@ -1,15 +1,18 @@
 import React from 'react'
 import PlayAlertSound from "@/pages/secret-peak/components/Sound";
-
 const CountDownTimer = ({hoursMinSecs}) => {
 
     const { hours = 0, minutes = 0, seconds = 60 } = hoursMinSecs;
     const [[hrs, mins, secs], setTime] = React.useState([hours, minutes, seconds]);
-
+    const [is_playing, setIsPlaying] = React.useState(true)
 
     const tick = () => {
 
-        if (hrs === 0 && mins === 0 && secs === 0){
+        if(hrs < 0 || mins < 0 || secs < 0){
+            setIsPlaying(false)
+            setTime([0, 0, 0]);
+
+        }else if (hrs === 0 && mins === 0 && secs === 0){
             reset()
             PlayAlertSound()
         }else if (mins === 0 && secs === 0) {
@@ -26,8 +29,10 @@ const CountDownTimer = ({hoursMinSecs}) => {
 
 
     React.useEffect(() => {
-        const timerId = setInterval(() => tick(), 1000);
-        return () => clearInterval(timerId);
+        if(is_playing){
+            const timerId = setInterval(() => tick(), 1000);
+            return () => clearInterval(timerId);
+        }
     });
 
     return (

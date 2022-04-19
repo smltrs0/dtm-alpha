@@ -5,8 +5,10 @@ export default function homeFinance(){
     <Layout>
       <Header/>
       <div>
-        <h1>Finance</h1>
-        <LineChart/>
+        <div className="container"> 
+          <h1>Finance</h1>
+          <LineChart/>
+        </div>
       </div>
     </Layout>
   </>
